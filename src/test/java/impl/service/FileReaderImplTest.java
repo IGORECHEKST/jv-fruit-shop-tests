@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
@@ -41,14 +42,17 @@ class FileReaderImplTest {
 
     @AfterAll
     static void tearDownAll() throws IOException {
-        // Удаляем созданные файлы после всех тестов.
         Files.deleteIfExists(Paths.get(VALID_FILE_PATH));
         Files.deleteIfExists(Paths.get(EMPTY_FILE_PATH));
     }
 
+    @BeforeEach
+    void setUp() {
+        fileReader = new FileReaderImpl();
+    }
+
     @Test
     void read_validFile_ok() {
-        fileReader = new FileReaderImpl();
         List<String> lines = fileReader.read(VALID_FILE_PATH);
         assertNotNull(lines);
         assertEquals(9, lines.size());
@@ -58,7 +62,6 @@ class FileReaderImplTest {
 
     @Test
     void read_emptyFile_ok() {
-        fileReader = new FileReaderImpl();
         List<String> lines = fileReader.read(EMPTY_FILE_PATH);
         assertNotNull(lines);
         assertEquals(0, lines.size());
@@ -66,7 +69,6 @@ class FileReaderImplTest {
 
     @Test
     void read_nonExistentFile_notOk() {
-        fileReader = new FileReaderImpl();
         String nonExistentPath = TEST_RESOURCES_PATH + "non_existent_file.csv";
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> fileReader.read(nonExistentPath));
@@ -75,7 +77,6 @@ class FileReaderImplTest {
 
     @Test
     void read_nullFilePath_notOk() {
-        fileReader = new FileReaderImpl();
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> fileReader.read(null));
         assertEquals("File path cannot be null", exception.getMessage());

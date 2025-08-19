@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import db.Storage;
+import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,13 +14,19 @@ class PurchaseOperationTest {
 
     @BeforeEach
     void setUp() {
-        Storage.getAll().clear();
+        Map<String, Integer> inventoryCopy = Storage.getAll();
+        for (String fruit : inventoryCopy.keySet()) {
+            Storage.set(fruit, 0);
+        }
         handler = new PurchaseOperation();
     }
 
     @AfterEach
     void tearDown() {
-        Storage.getAll().clear();
+        Map<String, Integer> inventoryCopy = Storage.getAll();
+        for (String fruit : inventoryCopy.keySet()) {
+            Storage.set(fruit, 0);
+        }
     }
 
     @Test
