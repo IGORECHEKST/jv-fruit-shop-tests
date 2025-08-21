@@ -13,7 +13,7 @@ class SupplyOperationTest {
 
     @BeforeEach
     void setUp() {
-        Map<String, Integer> inventoryCopy = Storage.getAll();
+        Map<String, Integer> inventoryCopy = Storage.fruitInventory;
         for (String fruit : inventoryCopy.keySet()) {
             Storage.set(fruit, 0);
         }
@@ -22,7 +22,7 @@ class SupplyOperationTest {
 
     @AfterEach
     void tearDown() {
-        Map<String, Integer> inventoryCopy = Storage.getAll();
+        Map<String, Integer> inventoryCopy = Storage.fruitInventory;
         for (String fruit : inventoryCopy.keySet()) {
             Storage.set(fruit, 0);
         }

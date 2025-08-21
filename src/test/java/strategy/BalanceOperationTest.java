@@ -17,7 +17,7 @@ class BalanceOperationTest {
 
     @AfterEach
     void tearDown() {
-        Storage.getAll().clear();
+        Storage.fruitInventory.clear();
     }
 
     @Test

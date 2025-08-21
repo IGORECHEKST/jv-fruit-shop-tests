@@ -12,7 +12,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
     public String generateReport() {
         StringBuilder report = new StringBuilder();
         report.append(CSV_HEADER).append(System.lineSeparator());
-        Map<String, Integer> inventory = Storage.getAll();
+        Map<String, Integer> inventory = Storage.fruitInventory;
         for (Map.Entry<String, Integer> entry : inventory.entrySet()) {
             report.append(entry.getKey())
                     .append(CSV_DELIMITER)
