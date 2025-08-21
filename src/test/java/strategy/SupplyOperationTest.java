@@ -3,7 +3,6 @@ package strategy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import db.Storage;
-import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,19 +12,12 @@ class SupplyOperationTest {
 
     @BeforeEach
     void setUp() {
-        Map<String, Integer> inventoryCopy = Storage.fruitInventory;
-        for (String fruit : inventoryCopy.keySet()) {
-            Storage.set(fruit, 0);
-        }
         handler = new SupplyOperation();
     }
 
     @AfterEach
     void tearDown() {
-        Map<String, Integer> inventoryCopy = Storage.fruitInventory;
-        for (String fruit : inventoryCopy.keySet()) {
-            Storage.set(fruit, 0);
-        }
+        Storage.fruitInventory.clear();
     }
 
     @Test
